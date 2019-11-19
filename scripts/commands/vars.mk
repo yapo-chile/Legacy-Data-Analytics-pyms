@@ -16,7 +16,7 @@ export REPORT_ARTIFACTS=reports
 #APP variables
 genport = $(shell expr \( $(shell id -u) - \( $(shell id -u) / 100 \) \* 100 \) \* 200 + 30400 + $(1))
 
-export APPNAME=feeds
+export APPNAME=pyms
 export VERSION=0.0.1
 export EXEC=./${APPNAME}
 export YO=$(shell expr `whoami`)
@@ -36,7 +36,7 @@ export SERVER_URL=http://${SERVER_HOST}:${SERVER_EXPOSED_PORT}
 
 #DATABASE variables from dockerized app to docker in postgres
 export DATABASE_PORT=$(call genport,3)
-export DATABASE_NAME=feeds-db
+export DATABASE_NAME=${APPNAME}-db
 export DATABASE_HOST=0.0.0.0
 export DATABASE_USER=docker
 export DATABASE_PASSWORD=docker
@@ -53,6 +53,7 @@ export DOCKER_REGISTRY=containers.mpi-internal.com
 export DOCKER_IMAGE=${DOCKER_REGISTRY}/yapo/${APPNAME}
 export DOCKER_IMAGE_COMPOSE=${DOCKER_REGISTRY}/yapo/${APPNAME}:${GIT_BRANCH}
 export DOCKER_GATEWAY_PORT=$(call genport,4)
+export DOCKER_CONTAINER_NAME=${APPNAME}-core
 
 
 BUILD_NAME=$(shell if [ -n "${GIT_TAG}" ]; then echo "${GIT_TAG}"; else echo "${GIT_BRANCH}"; fi;)
