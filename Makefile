@@ -1,7 +1,7 @@
 include scripts/commands/vars.mk
 
 ## Deletes all containers
-docker-remove:
+docker-remove: docker-stop
 	docker-compose rm -f
 
 ## Stops all containers
@@ -18,7 +18,7 @@ compose-up: docker-build
 	docker-compose up -d
 
 start: compose-up info
-	##--scale -d suggester=4 
+	##--scale -d pyms=4 
 
 ## Publishes container
 docker-publish:

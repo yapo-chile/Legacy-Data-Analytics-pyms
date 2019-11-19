@@ -18,6 +18,15 @@ make start-local
 make start
 ```
 
+### Run type hints validator
+
+It's important to run ***make install*** first because its a library called mypy that check this out
+
+```
+make mypy
+```
+
+
 ## ENV PARAMS (More will be added soon)
 
 *SERVER_PORT* <num>
