@@ -5,8 +5,8 @@ from flask import make_response, jsonify
 
 
 class Response():
-    def __init__(self, status: d.StatusCode, data: d.JSONType = None) -> None:
-        self.status = d.ValidateRestStatusCode(status)
+    def __init__(self, status: d.HTTPStatus, data: d.JSONType = None) -> None:
+        self.status = status
         if data:
             self.data = data
     

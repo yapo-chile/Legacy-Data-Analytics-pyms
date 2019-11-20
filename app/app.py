@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route("/healthcheck")
 def healthCheck() -> d.JSONType:
-    return h.Status()
+    return h.healthCheckHandler()
 
 if __name__ == "__main__":
     debug = os.getenv('SERVER_DEBUG') or 'true'
