@@ -25,12 +25,12 @@ make start-local
 make start
 ```
 
-### Run type hints validator
+### Run tests
 
-It's important to run ***make install*** first because its a library called mypy that check this out
+It's important to run ***make install*** first because it has some libraries dependencies to run check this out
 
 ```
-make mypy
+make tests
 ```
 
 
