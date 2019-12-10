@@ -1,24 +1,26 @@
-from flask import Flask
-from flask import request
-
-import json
 import logging
-import os
-import typing as t
-
+from flask import Flask
 import domain as d
 import interfaces.handlers as h
+from infraestructure.config import Config
 
-app = Flask(__name__)
+APP = Flask(__name__)
 
-@app.route("/healthcheck")
+CONFIG: Config = Config()
+
+# Logger initial conf
+LOGGER = logging.getLogger(CONFIG.logger.LogLevel)
+LOGGER.handlers.extend(LOGGER.handlers)
+LOGGER.setLevel(LOGGER.level)
+LOGGER.info(CONFIG)
+
+
+@APP.route("/healthcheck", methods=['GET'])
 def healthCheck() -> d.JSONType:
+    '''healthCheck route'''
     return h.healthCheckHandler()
 
+
 if __name__ == "__main__":
-    debug = os.getenv('SERVER_DEBUG') or 'true'
-    port = os.getenv('SERVER_PORT') or 5000
-    app.run(host="0.0.0.0", port=int(port), threaded=True, debug=json.loads(debug))
-    gunicorn_logger = logging.getLogger('gunicorn.error')
-    app.logger.handlers = gunicorn_logger.handlers
-    app.logger.setLevel(gunicorn_logger.level)
+    logging.basicConfig(level=logging.DEBUG)
+    APP.run(*CONFIG.server, threaded=True)

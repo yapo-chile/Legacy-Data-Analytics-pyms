@@ -1,5 +1,7 @@
 import domain as d
-from .logger import Response
+from .handler import Response
+import os
 
 def healthCheckHandler() -> d.JSONType:
-    return Response(d.HTTPStatus(200)).Success('OK')
+    r = Response(200)
+    return r.toJson(msg=d.JSONType({"status": "OK"}))

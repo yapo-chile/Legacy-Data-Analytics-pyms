@@ -1,10 +1,17 @@
 # pyms
 Python Microservice template
 
+## Requirements
+```
+python >=3.7 and <=3.8
+pip3 install virtualenv
+```
+
 ## Steps
 ```
-virtualenv --python=python3 <name_virtual_env>
-cd <name_virtual_env> && git clone git@github.mpi-internal.com:Yapo/pyms.git
+git clone git@github.mpi-internal.com:Yapo/pyms.git
+virtualenv --python=python3 app
+source app/bin/activate
 ```
 
 ### Run Locally

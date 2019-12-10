@@ -38,15 +38,46 @@ build:
 reboot: remove build
 	docker run -d --name ${APPNAME}  -p ${SERVER_EXPOSED_PORT}:${SERVER_PORT} ${DOCKER_IMAGE}:${BUILD_TAG}
 
+# Starts app locally
 start-local:
 	python app/app.py
 
+# Run typing tests
 mypy:
+## Requires mypy
 	mypy app/app.py
 
 # Installs libraries locally
 install:
 	pip install -r app/requirements.txt
+
+# Run tests
+test:
+## Requires nose
+	cd app && nosetests -v tests/
+
+# Run codestyle lint
+## Requires pycodestyle
+check-style:
+	pycodestyle app/
+
+# Run code pep8 formater
+## requires autopep8
+auto-format:
+	autopep8 --in-place --aggressive --aggressive -r app/
+
+# Run pylint code static checker
+## requires pylint
+pylint:
+	pylint app/*.py
+
+# Run lints to generate report
+lints:
+	@scripts/commands/lints.sh
+
+# runs all related test to check app
+tests: test check-style lints
+
 
 info:
 	@echo "YO           	         : ${YO}"
