@@ -10,4 +10,5 @@ pgdata
 man
 reports/checkstyle-report.xml
 debug.log
+tox.ini
 __pycache__/

@@ -16,9 +16,9 @@ LOGGER.info(CONFIG)
 
 
 @APP.route("/healthcheck", methods=['GET'])
-def healthCheck() -> d.JSONType:
+def healthcheck() -> d.JSONType:
     '''healthCheck route'''
-    return h.healthCheckHandler()
+    return h.healthcheckHandler()
 
 
 if __name__ == "__main__":
