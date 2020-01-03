@@ -1,13 +1,6 @@
 #!/usr/bin/env python
 # <?xml version="1.0" encoding="UTF-8"?>
 # <checkstyle version="5.0">
-#    <file name="hygiene/checks/__init__.py">
-#       <error column="0" line="5" message="Wildcard import hygiene.checks.github" severity="error" source="pylint" />
-#       <error column="0" line="6" message="Wildcard import hygiene.checks.engprod" severity="error" source="pylint" />
-#       <error column="0" line="7" message="Wildcard import hygiene.checks.travis" severity="error" source="pylint" />
-#       <error column="0" line="8" message="Wildcard import hygiene.checks.golang" severity="error" source="pylint" />
-#       <error column="0" line="9" message="Wildcard import hygiene.checks.ownership" severity="error" source="pylint" />
-#    </file>
 # </checkstyle>
 
 import sys
@@ -57,7 +50,7 @@ def read_pylint_json_from_stdin():
 
 
 def format_checkstyle(notes):
-    def keyfn(x): return x.filepath
+    keyfn = lambda x: x.filepath
     notes = sorted(notes, key=keyfn)
 
     f = CheckstyleFormatter()
@@ -78,8 +71,7 @@ class CheckstyleFormatter:
         self._writer = StringIO()
 
     def write_start(self):
-        self._writer.write(
-            '<?xml version="1.0" encoding="UTF-8"?><checkstyle version="5.0">')
+        self._writer.write('<?xml version="1.0" encoding="UTF-8"?><checkstyle version="5.0">')
 
     def write_end(self):
         self._writer.write('</checkstyle>')

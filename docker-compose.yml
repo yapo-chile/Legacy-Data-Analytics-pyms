@@ -30,12 +30,12 @@ services:
     build:
       context:  ./nginx
       dockerfile: Dockerfile
-    container_name: pyms-proxy
+    container_name: ${APPNAME}-proxy
     ports:
       - "${NGINX_EXPOSED_PORT}:${NGINX_PORT}"
   db:
     image: postgres:12.0-alpine
-    container_name: pyms-db
+    container_name: ${APPNAME}-db
     volumes:
       - "./pgdata:/var/lib/postgresql/data/pgdata"
     ports:
